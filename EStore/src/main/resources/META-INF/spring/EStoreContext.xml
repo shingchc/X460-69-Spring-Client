@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:aop="http://www.springframework.org/schema/aop"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+       
+    <context:annotation-config />
+    <context:component-scan base-package="com.uciext" />
+
+	<bean id="catalogDao" class="com.uciext.springfw.hw.catalogs.dao.jdbc.JdbcCatalogDao">
+		<property name="dataSource" ref="estoreDS" />
+		<property name="catalogService" ref="catalogService" /> 
+	</bean>
+
+	<bean id="productDao" class="com.uciext.springfw.hw.catalogs.dao.jdbc.JdbcProductDao">
+		<property name="dataSource" ref="estoreDS" />
+		<property name="catalogService" ref="catalogService" /> 
+	</bean>
+
+	<bean id="catalogService" scope="singleton"
+    	class="com.uciext.springfw.hw.catalogs.service.impl.CatalogServiceImpl">
+		<property name="catalogDao" ref="catalogDao" />
+		<property name="productDao" ref="productDao" />
+  	</bean>
+
+		<!-- Using JDBC Template for Students data access -->
+
+	
+	<!-- Using JDBC Template for Students data access -->
+<!--  
+	<bean id="jdbcTemplate" 
+			class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate"> 
+		<constructor-arg ref="estoreDS"/> 
+	</bean>
+
+	<bean id="studentDao" class="com.uciext.springfw.class05.students.dao.jdbc.JdbcStudentDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate" /> 
+	</bean>
+
+	<bean id="registrationDao" class="com.uciext.springfw.class05.students.dao.jdbc.JdbcRegistrationDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate" /> 
+		<property name="studentService" ref="studentService" />
+		<property name="courseService" ref="courseService" /> 
+	</bean>
+
+	<bean id="studentService"
+    	class="com.uciext.springfw.class05.students.service.impl.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao" />
+		<property name="registrationDao" ref="registrationDao" />
+  	</bean>
+ -->  	
+  	
+</beans>
